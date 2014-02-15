@@ -4,6 +4,9 @@ package gonumeth
 // at x0 by using the Bisection method.
 // A `root` value of NaN means the function failed.
 func NSimpleSolveBisection(f SingleVarFunction, x0 float64) (result float64) {
+	var (
+		f0 = f(x0)
+	)
 	return
 }
 

@@ -13,19 +13,19 @@ func sin(x float64) float64 {
 var sinFunc SingleVarFunction = sin
 
 func ExampleNDifferentiateCentral() {
-	var diff, _ = NDifferentiateCentral(sinFunc, math.Pi/2, 0.001)
+	var diff = NDifferentiateCentral(sinFunc, math.Pi/2, 0.001)
 	fmt.Println(diff)
 	// Output: 0
 }
 
 func ExampleNDifferentiateForward() {
-	var diff, _ = NDifferentiateForward(sinFunc, math.Pi, 0.001)
+	var diff = NDifferentiateForward(sinFunc, math.Pi, 0.001)
 	fmt.Println(diff)
 	// Output: 0
 }
 
 func ExampleNDifferentiateBackward() {
-	var diff, _ = NDifferentiateBackward(sinFunc, 0, 0.001)
+	var diff = NDifferentiateBackward(sinFunc, 0, 0.001)
 	fmt.Println(diff)
 	// Output: 0
 }
