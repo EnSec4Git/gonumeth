@@ -6,6 +6,8 @@ import (
 	"math"
 )
 
+// TODO: Check for other
+
 const (
 	maxIterations = 100
 	defEpsilon    = 0.0001
