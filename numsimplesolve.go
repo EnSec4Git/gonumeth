@@ -4,6 +4,8 @@ import "math"
 
 const hsolve float64 = 0.01
 
+// TODO: Finish caching implementation
+
 type CachedSingleVarFunction SingleVarFunction
 
 func CacheFunction(f SingleVarFunction) (fres CachedSingleVarFunction) {
@@ -180,3 +182,5 @@ func NSimpleSolveSecant(f SingleVarFunction, x0 float64, maxIterations int,
 	}
 	return math.NaN()
 }
+
+// TODO: Implement Generic solve

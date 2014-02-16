@@ -169,3 +169,5 @@ func NSolveSystemDeriv(f MultiVarFunction, x0 matrix.Matrix, maxIterations int,
 	}
 	return nil
 }
+
+// TODO: Implement NSolveSystemSeidel method

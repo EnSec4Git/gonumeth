@@ -117,3 +117,5 @@ func NIntegrateSimpsonAdaptive(f SingleVarFunction, a float64, b float64,
 	return simpsonAdaptiveRec(f, a, b, goalErrorAbs, goalErrorRel,
 		S_init, fa, fb, fc)
 }
+
+// TODO: Implement adaptive Gauss-Kronrod

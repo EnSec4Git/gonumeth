@@ -60,6 +60,7 @@ func NDifferentiateBackward(f SingleVarFunction, x float64,
 }
 
 // TODO: Implement 3-point rules
+// TODO: Maybe implement n-point rules
 
 // NDerivative returns a function that approximates the original function's
 // derivative. The derivative is calculculated locally.

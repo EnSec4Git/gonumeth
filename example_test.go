@@ -6,7 +6,7 @@ import (
 	"math"
 )
 
-// TODO: Check for other
+// TODO: Check for results on other archs for other Example tests
 
 const (
 	maxIterations = 100
