@@ -18,7 +18,7 @@ the license, check the file `LICENSE`.
 
 Usage
 --------
-For example usage, check the file `example_tes.go` in the root directory.
+For example usage, check the file `example_test.go` in the root directory.
 
 Dependencies
 --------
