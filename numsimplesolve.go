@@ -184,3 +184,4 @@ func NSimpleSolveSecant(f SingleVarFunction, x0 float64, maxIterations int,
 }
 
 // TODO: Implement Generic solve
+// Use the iteration functions for each solver
