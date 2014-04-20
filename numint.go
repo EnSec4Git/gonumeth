@@ -98,7 +98,7 @@ func simpsonAdaptiveRec(f SingleVarFunction, a float64, b float64,
 	return
 }
 
-// NIntegrateGaussKronrodAdaptive attempts to find the numeric value of the
+// NIntegrateSimpsonAdaptive attempts to find the numeric value of the
 // integral of f in the interval [a, b] using the Simspon rule by
 // further "sectioning" subintervals until desired error goals are achieved.
 // The function returns the result and error estimation as result and
@@ -117,5 +117,3 @@ func NIntegrateSimpsonAdaptive(f SingleVarFunction, a float64, b float64,
 	return simpsonAdaptiveRec(f, a, b, goalErrorAbs, goalErrorRel,
 		S_init, fa, fb, fc)
 }
-
-// TODO: Implement adaptive Gauss-Kronrod

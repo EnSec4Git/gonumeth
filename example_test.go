@@ -6,12 +6,11 @@ import (
 	"math"
 )
 
-// TODO: Check for results on other archs for other Example tests
-
 const (
 	maxIterations = 100
 	defEpsilon    = 0.0001
 	derivH        = 0.001
+	deriv3H       = 0.0005
 )
 
 func sin(x float64) float64 {
@@ -34,6 +33,24 @@ func ExampleNDifferentiateForward() {
 
 func ExampleNDifferentiateBackward() {
 	var diff = NDifferentiateBackward(sinFunc, 0, derivH)
+	fmt.Printf("%.4e\n", diff)
+	// Output: 1.0000e+00
+}
+
+func ExampleNDifferentiateCentralThreePoint() {
+	var diff = NDifferentiateCentralThreePoint(sinFunc, math.Pi/2, deriv3H)
+	fmt.Printf("%.4e\n", diff)
+	// Output: 0.0000e+00
+}
+
+func ExampleNDifferentiateForwardThreePoint() {
+	var diff = NDifferentiateForwardThreePoint(sinFunc, math.Pi, deriv3H)
+	fmt.Printf("%.4e\n", diff)
+	// Output: -1.0000e+00
+}
+
+func ExampleNDifferentiateBackwardThreePoint() {
+	var diff = NDifferentiateBackwardThreePoint(sinFunc, 0, deriv3H)
 	fmt.Printf("%.4e\n", diff)
 	// Output: 1.0000e+00
 }

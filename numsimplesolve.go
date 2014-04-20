@@ -29,7 +29,7 @@ type NSimpleSolver func(f SingleVarFunction, x0 float64, maxIterations int,
 	epsilon float64) float64
 
 // The iteration function for the bisection method
-func bisectionIteration(f SingleVarFunction, xi float64,
+func bisectionIteration(f CachedSingleVarFunction, xi float64,
 	xi_1 float64) (xi_new float64, xi1 float64) {
 	xi1 = 0.5 * (xi + xi_1)
 	fi1 := f(xi1)
@@ -45,8 +45,9 @@ func bisectionIteration(f SingleVarFunction, xi float64,
 // NSimpleSolveBisection attempts to find a root of the function f starting
 // at x0 by using the Bisection method.
 // A `root` value of NaN means the function failed.
-func NSimpleSolveBisection(f SingleVarFunction, x0 float64, maxIterations int,
+func NSimpleSolveBisection(f0 SingleVarFunction, x0 float64, maxIterations int,
 	epsilon float64) (result float64) {
+	f := CacheFunction(f0)
 	step := hsolve
 	xi := x0 + step
 	xi_1 := x0
@@ -78,8 +79,8 @@ func NSimpleSolveBisection(f SingleVarFunction, x0 float64, maxIterations int,
 }
 
 // The iteration function for the Newton method
-func newtonIteration(f SingleVarFunction, xi float64) float64 {
-	deriv := NDifferentiateCentral(f, xi, hsolve)
+func newtonIteration(f CachedSingleVarFunction, xi float64) float64 {
+	deriv := NDifferentiateCentral(SingleVarFunction(f), xi, hsolve)
 	if deriv == 0 {
 		return math.NaN()
 	}
@@ -92,11 +93,12 @@ func newtonIteration(f SingleVarFunction, xi float64) float64 {
 // behavior of f locally (it being differentiable and having non-zero deriv.).
 // If this is not true, the function might fail to produce the proper result.
 // A `root` value of NaN means the function failed.
-func NSimpleSolveNewton(f SingleVarFunction, x0 float64, maxIterations int,
+func NSimpleSolveNewton(f0 SingleVarFunction, x0 float64, maxIterations int,
 	epsilon float64) (result float64) {
 	var (
 		xi float64 = x0
 		fi float64
+		f  CachedSingleVarFunction = CacheFunction(f0)
 	)
 	for i := 0; i < maxIterations || maxIterations == 0; i++ {
 		if math.IsNaN(xi) {
@@ -112,11 +114,11 @@ func NSimpleSolveNewton(f SingleVarFunction, x0 float64, maxIterations int,
 }
 
 // Iteration function for the Halley method
-func halleyIteration(f SingleVarFunction, fprime SingleVarFunction,
+func halleyIteration(f CachedSingleVarFunction, fprime CachedSingleVarFunction,
 	xi float64) float64 {
 	fi := f(xi)
 	f_di := fprime(xi)
-	f_d2i := NDifferentiateCentral(fprime, xi, hsolve)
+	f_d2i := NDifferentiateCentral(SingleVarFunction(fprime), xi, hsolve)
 	factor := 2*f_di*f_di - fi*f_d2i
 	if factor == 0 {
 		return math.NaN()
@@ -130,13 +132,14 @@ func halleyIteration(f SingleVarFunction, fprime SingleVarFunction,
 // of f locally (in particular it being differentiable and a non-zero value
 // of the function and its first derivative).
 // A `root` value of NaN means the function failed.
-func NSimpleSolveHalley(f SingleVarFunction, x0 float64, maxIterations int,
+func NSimpleSolveHalley(f0 SingleVarFunction, x0 float64, maxIterations int,
 	epsilon float64) (root float64) {
 	var (
-		xi     float64 = x0
-		fi     float64
-		fderiv SingleVarFunction = NDerivative(f, hsolve)
+		f  CachedSingleVarFunction = CacheFunction(f0)
+		xi float64                 = x0
+		fi float64
 	)
+	fderiv := CacheFunction(NDerivative(SingleVarFunction(f), hsolve))
 	for i := 0; i < maxIterations || maxIterations == 0; i++ {
 		if math.IsNaN(xi) {
 			return xi
@@ -151,7 +154,7 @@ func NSimpleSolveHalley(f SingleVarFunction, x0 float64, maxIterations int,
 }
 
 // Iteration function for the secant method
-func secantIteration(f SingleVarFunction, xi float64, xi_1 float64) float64 {
+func secantIteration(f CachedSingleVarFunction, xi float64, xi_1 float64) float64 {
 	fi := f(xi)
 	fi_1 := f(xi_1)
 	if fi == fi_1 {
@@ -163,11 +166,12 @@ func secantIteration(f SingleVarFunction, xi float64, xi_1 float64) float64 {
 // NSimpleSolveSecant attempts to find a root of the function f starting
 // at x0 using the Secant method. The function chooses a second starting point.
 // A `root` value of NaN means the function failed.
-func NSimpleSolveSecant(f SingleVarFunction, x0 float64, maxIterations int,
+func NSimpleSolveSecant(f1 SingleVarFunction, x0 float64, maxIterations int,
 	epsilon float64) (root float64) {
 	var (
-		xi  float64 = x0
-		xi1 float64 = x0 + hsolve
+		f   CachedSingleVarFunction = CacheFunction(f1)
+		xi  float64                 = x0
+		xi1 float64                 = x0 + hsolve
 		fi  float64
 	)
 	for i := 0; i < maxIterations || maxIterations == 0; i++ {
