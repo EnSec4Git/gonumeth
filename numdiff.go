@@ -33,8 +33,7 @@ const (
 type SingleVarFunction func(float64) float64
 
 // NDifferentiateCentral takes a single variable function (f), a value (x) and
-// a step (h) and returns the numerical value of the derivative of f at x
-// along with its estimated error (result and errorEstimate respectively).
+// a step (h) and returns the numerical value of the derivative of f at x.
 // Note that an appropriate value of h is essential. This function uses a
 // 4-point rule with x at the center.
 func NDifferentiateCentral(f SingleVarFunction, x float64,
@@ -69,8 +68,7 @@ func NDifferentiateBackward(f SingleVarFunction, x float64,
 
 // NDifferentiateCentralThreePoint takes a single variable function (f),
 // a value (x) and a step (h) and returns the numerical value of the derivative
-// of f at x along with its estimated error (result and errorEstimate
-// respectively). Note that an appropriate value of h is essential.
+// of f at x. Note that an appropriate value of h is essential.
 // This function uses a 2-point rule with x at the center.
 func NDifferentiateCentralThreePoint(f SingleVarFunction, x float64,
 	h float64) (result float64) {
@@ -82,8 +80,7 @@ func NDifferentiateCentralThreePoint(f SingleVarFunction, x float64,
 
 // NDifferentiateForwardThreePoint takes a single variable function (f),
 // a value (x) and a step (h) and returns the numerical value of the derivative
-// of f at x along with its estimated error (result and errorEstimate
-// respectively). Note that an appropriate value of h is essential.
+// of f at x. Note that an appropriate value of h is essential.
 // This function uses a 3-point forward rule with x as leftmost point.
 func NDifferentiateForwardThreePoint(f SingleVarFunction, x float64,
 	h float64) (result float64) {
@@ -95,8 +92,7 @@ func NDifferentiateForwardThreePoint(f SingleVarFunction, x float64,
 
 // NDifferentiateBackwardThreePoint takes a single variable function (f),
 // a value (x) and a step (h) and returns the numerical value of the derivative
-// of f at x along with its estimated error (result and errorEstimate
-// respectively). Note that an appropriate value of h is essential.
+// of f at x. Note that an appropriate value of h is essential.
 // This function uses a 3-point forward rule with x as rightmost point.
 func NDifferentiateBackwardThreePoint(f SingleVarFunction, x float64,
 	h float64) (result float64) {
