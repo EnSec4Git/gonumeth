@@ -70,25 +70,29 @@ func ExampleNIntegrateSimpsonAdaptive() {
 }
 
 func ExampleNSimpleSolveBisection() {
-	var res = NSimpleSolveBisection(sinFunc, 3*math.Pi/4, maxIterations, defEpsilon)
+	var res = NSimpleSolveBisection(sinFunc, 3*math.Pi/4, maxIterations,
+		defEpsilon)
 	fmt.Printf("%.4e\n", res)
 	// Output: 3.1415e+00
 }
 
 func ExampleNSimpleSolveNewton() {
-	var res = NSimpleSolveNewton(sinFunc, 5*math.Pi/4, maxIterations, defEpsilon)
+	var res = NSimpleSolveNewton(sinFunc, 5*math.Pi/4, maxIterations,
+		defEpsilon)
 	fmt.Printf("%.4e\n", res)
 	// Output: 3.1416e+00
 }
 
 func ExampleNSimpleSolveHalley() {
-	var res = NSimpleSolveHalley(sinFunc, 7*math.Pi/4, maxIterations, defEpsilon)
+	var res = NSimpleSolveHalley(sinFunc, 7*math.Pi/4, maxIterations,
+		defEpsilon)
 	fmt.Printf("%.4e\n", res)
 	// Output: 6.2832e+00
 }
 
 func ExampleNSimpleSolveSecant() {
-	var res = NSimpleSolveSecant(sinFunc, 9*math.Pi/4, maxIterations, defEpsilon)
+	var res = NSimpleSolveSecant(sinFunc, 9*math.Pi/4, maxIterations,
+		defEpsilon)
 	fmt.Printf("%.4e\n", res)
 	// Output: 6.2832e+00
 }

@@ -59,6 +59,7 @@ var solvers = []NSimpleSolver{
 	NSimpleSolveHalley,
 	NSimpleSolveNewton,
 	NSimpleSolveSecant,
+	NSimpleSolveGeneric,
 }
 
 // Tests all solvers with the testing functions
